@@ -1,4 +1,5 @@
 # Servidor Web con módulo nativo NODE.
+se utiliza en semana 2, ej 05. Este no aplica al parcial.
 
 ## Servidor básico
 Podemos crear un servidor web básico en Node.js, 
