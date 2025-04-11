@@ -9,13 +9,18 @@ const admin = new ProductManger();
 //     await admin.addProduct({ id, name: 'Celular TCL', description: 'Celular TCL 34', image: 'foto2.jpg', price: 23000});
 // }
 
-const test2 = async () => {
-    let id = crypto.randomUUID();
-    await admin.addProduct({ id, name: 'TV 32', description: 'TV LG 32', image: 'foto.jpg', price: 54000});
-
-    id = crypto.randomUUID();
-    await admin.addProduct({ id, name: 'Celular TCL', description: 'Celular TCL 34', image: 'foto2.jpg', price: 23000});
+try {
+    const test2 = async () => {
+        let id = crypto.randomUUID();
+        await admin.addProduct({ name: 'TV 32', description: 'TV LG 32', image: 'foto.jpg', price: 54000});
+    
+        id = crypto.randomUUID();
+        await admin.addProduct({ name: 'Celular TCL', description: 'Celular TCL 34', image: 'foto2.jpg', price: 23000});
+    }
+    
+    test2();
+} catch (error) {
+    console.error(error);
 }
 
-test2();
 admin.getProducts();

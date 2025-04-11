@@ -1,1 +1,1 @@
-[{"id":"d16ed7ca-2036-4766-afd6-13fc15f0b67b","name":"TV 32","description":"TV LG 32","image":"foto.jpg","price":54000},{"id":"ee07148d-fdbe-4143-821b-45b74d9212cc","name":"Celular TCL","description":"Celular TCL 34","image":"foto2.jpg","price":23000}]
+[{"name":"TV 32","description":"TV LG 32","image":"foto.jpg","price":54000,"id":"9e1e2a99-503b-45ab-9f39-363a695eeeac"},{"name":"Celular TCL","description":"Celular TCL 34","image":"foto2.jpg","price":23000,"id":"39c12978-0efe-4b2a-b894-6eb80f7f1afd"}]

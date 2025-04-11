@@ -32,17 +32,18 @@ class ProductManger{
         })
     }
 
-    readProductsJSON(){
-        const fs = require('fs');
+    async readProductsJSON() {
+        const fs = require('fs').promises;
         const path = "./productos.json";
-
-        fs.readFile(path, function(err, data){
-            if(err){
-                console.error('Ocurrio un error');
-            }else{
-                console.log(JSON.parse(data));
-            }
-        })
+    
+        try {
+            const data = await fs.readFile(path, 'utf-8');
+            console.log(JSON.parse(data));
+            return JSON.parse(data);
+        } catch (err) {
+            console.error('Ocurrió un error', err);
+            return [];
+        }
     }
 
 }
