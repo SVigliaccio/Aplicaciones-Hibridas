@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import crypto from "crypto";
 //const crypto = require("crypto");
 const path = './productos.json';
 
