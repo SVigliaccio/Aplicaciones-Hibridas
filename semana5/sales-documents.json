@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "status": "TV 00",
+        "document_type": "invoice",
+        "fecha": "foto7.jpg",
+        "cliente_id": 94000,
+        "amount": "1"
+    },
+    {
+        "name": "TV 43",
+        "document_type": "receipt",
+        "image": "foto2.jpg",
+        "price": 84000,
+        "id": 2
+    },
+    {
+        "name": "TV 50",
+        "document_type": "credit_note",
+        "image": "foto4.jpg",
+        "price": 84000,
+        "id": "f6ff5f8b-aeb9-4d3c-b2ce-bbbc4bee33f7"
+    },
+    {
+        "name": "TV test",
+        "description": "TV LG test",
+        "image": "foto7.jpg",
+        "price": 104000,
+        "id": "5086b47c-a595-4f88-8fa7-9d9c665e5133"
+    }
+]
