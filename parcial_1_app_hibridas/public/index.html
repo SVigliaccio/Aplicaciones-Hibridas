@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>API de Gestión <i>Névola</i></h1>
+        <p class="description">Documentación completa de la API para gestionar redes de líderes y colaboradores de Venta Directa.</p>
+        <a href="nevola.postman_collection.json" download="nevola.postman_collection.json" class="download-btn" title="Descargar Colección de Postman">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+        </a>
+    </header>
+
+    <main class="container">
+        <div class="endpoints-container">
+            <h2 class="endpoints-title">Endpoints de Usuarios</h2>
+            
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/users</span>
+                    <span class="description">Obtener todos los usuarios</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Lista de usuarios obtenida exitosamente</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "users": [
+            {
+                "id": "680b952779bf2d7ee7a386be",
+                "name": "john",
+                "email": "john@mail.com"
+            },
+            {
+                "id": "6810d327b7297b29bec331a6",
+                "name": "doe",
+                "email": "doe@mail.com"
+            }
+        ]
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/api/users</span>
+                    <span class="description">Crear un nuevo usuario</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="schema-section">
+                        <h3>Request Body</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Requerido</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Nombre completo del usuario</td>
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Correo electrónico del usuario</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Contraseña del usuario</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de request</h4>
+                        <pre class="response-example">
+    {
+        "name": "Juan Perez",
+        "email": "juan.perez@example.com",
+        "password": "123456"
+    }</pre>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>201</td>
+                                    <td>Usuario creado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>400</td>
+                                    <td>Datos de entrada inválidos</td>
+                                </tr>
+                                <tr>
+                                    <td>403</td>
+                                    <td>Faltan parámetros</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Usuario creado",
+        "data": {
+            "id": "6818378a2012a41414ff4589",
+            "name": "Juan Perez"
+        }
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/users/{id}</span>
+                    <span class="description">Obtener un usuario por ID</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID del usuario a obtener</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Usuario encontrado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Usuario no encontrado</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "id": "680b952779bf2d7ee7a386be",
+        "name": "prueba",
+        "email": "prueba@mail.com",
+        "password": "$2b$10$KjLCNw2qkCOMSRyt1CAo0Oj1my.KuXYIK/EzLs2Si/8AO8DTFDPGK"
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method put">PUT</span>
+                    <span class="endpoint-path">/api/users/{id}</span>
+                    <span class="description">Actualizar un usuario</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID del usuario a actualizar</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="schema-section">
+                        <h3>Request Body</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Requerido</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Nombre completo del usuario</td>
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Correo electrónico del usuario</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Contraseña del usuario</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de request</h4>
+                        <pre class="response-example">
+    {
+        "name": "Juan Perez",
+        "email": "juan.perez@example.com",
+        "password": "123456"
+    }</pre>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Usuario actualizado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>400</td>
+                                    <td>Datos de entrada inválidos</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Usuario no encontrado</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Usuario actualizado",
+        "data": {
+            "id": "681855e9c8af13c86ecc332a",
+            "name": "Sofia"
+        }
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method delete">DELETE</span>
+                    <span class="endpoint-path">/api/users/{id}</span>
+                    <span class="description">Eliminar un usuario</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID del usuario a eliminar</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Usuario eliminado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Usuario no encontrado</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Usuario eliminado"
+    }</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoints-container">
+            <h2 class="endpoints-title">Endpoints de Productos</h2>
+
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/products</span>
+                    <span class="description">Obtener todos los productos</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de consulta (opcionales)</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>string</td>
+                                <td><span>No</span></td>
+                                <td>Texto para buscar en el nombre de los productos, puede ser parcial</td>
+                            </tr>
+                            <tr>
+                                <td>category</td>
+                                <td>number</td>
+                                <td><span>No</span></td>
+                                <td>Filtra productos por categoría</td>
+                            </tr>
+                            <tr>
+                                <td>minPrice</td>
+                                <td>number</td>
+                                <td><span>No</span></td>
+                                <td>Precio mínimo de los productos</td>
+                            </tr>
+                            <tr>
+                                <td>maxPrice</td>
+                                <td>number</td>
+                                <td><span>No</span></td>
+                                <td>Precio máximo de los productos</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Lista de productos obtenida exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>500</td>
+                                    <td>Error del servidor</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+{
+    "products": [
+        {
+            "id": "681855e9c8af13c86ecc332b",
+            "name": "Producto 1",
+            "description": "Descripción del producto 1",
+            "category": 1,
+            "price": 100
+        },
+        {
+            "id": "681855e9c8af13c86ecc332c",
+            "name": "Producto 2",
+            "description": "Descripción del producto 2",
+            "category": 2,
+            "price": 200
+        }
+    ]
+}</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/products/{id}</span>
+                    <span class="description">Obtener un producto por ID</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID del producto a obtener</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Producto encontrado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Producto no encontrado</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+{
+    "id": "681855e9c8af13c86ecc332b",
+    "name": "Producto 1",
+    "description": "Descripción del producto 1",
+    "category": 1,
+    "price": 100
+}</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/api/products</span>
+                    <span class="description">Crear un nuevo producto</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="schema-section">
+                        <h3>Request Body</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Requerido</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Nombre del producto (3-50 caracteres)</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Descripción del producto (10-200 caracteres)</td>
+                                </tr>
+                                <tr>
+                                    <td>category</td>
+                                    <td>number</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>ID de la categoría del producto</td>
+                                </tr>
+                                <tr>
+                                    <td>price</td>
+                                    <td>number</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Precio del producto (mayor a 0)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de request</h4>
+                        <pre class="response-example">
+    {
+        "name": "Producto nuevo",
+        "description": "Descripción detallada del producto nuevo",
+        "category": 1,
+        "price": 150.50
+    }</pre>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>201</td>
+                                    <td>Producto creado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>400</td>
+                                    <td>Datos de entrada inválidos</td>
+                                </tr>
+                                <tr>
+                                    <td>403</td>
+                                    <td>Faltan parámetros</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Producto creado",
+        "data": {
+            "id": "681855e9c8af13c86ecc332b",
+            "name": "Producto nuevo",
+            "category": 1,
+            "price": 150.50
+        }
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method put">PUT</span>
+                    <span class="endpoint-path">/api/products/{id}</span>
+                    <span class="description">Actualizar un producto</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID del producto a actualizar</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="schema-section">
+                        <h3>Request Body</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Requerido</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Nombre del producto (3-50 caracteres)</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Descripción del producto (10-200 caracteres)</td>
+                                </tr>
+                                <tr>
+                                    <td>category</td>
+                                    <td>number</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>ID de la categoría del producto</td>
+                                </tr>
+                                <tr>
+                                    <td>price</td>
+                                    <td>number</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Precio del producto (mayor a 0)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de request</h4>
+                        <pre class="response-example">
+    {
+        "name": "Producto actualizado",
+        "description": "Descripción actualizada del producto",
+        "category": 2,
+        "price": 175.75
+    }</pre>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Producto actualizado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>400</td>
+                                    <td>Datos de entrada inválidos</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Producto no encontrado</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Producto actualizado",
+        "data": {
+            "id": "681855e9c8af13c86ecc332b",
+            "name": "Producto actualizado",
+            "category": 2,
+            "price": 175.75
+        }
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method delete">DELETE</span>
+                    <span class="endpoint-path">/api/products/{id}</span>
+                    <span class="description">Eliminar un producto</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID del producto a eliminar</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Producto eliminado exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Producto no encontrado</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Producto eliminado"
+    }</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoints-container">
+            <h2 class="endpoints-title">Endpoints de Categorías</h2>
+
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/categories</span>
+                    <span class="description">Obtener todas las categorías</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Lista de categorías obtenida exitosamente</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "categories": [
+            {
+                "id": "681855e9c8af13c86ecc332d",
+                "name": "Categoría 1",
+                "description": "Descripción de la categoría 1"
+            },
+            {
+                "id": "681855e9c8af13c86ecc332e",
+                "name": "Categoría 2",
+                "description": "Descripción de la categoría 2"
+            }
+        ]
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/api/categories</span>
+                    <span class="description">Crear una nueva categoría</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="schema-section">
+                        <h3>Request Body</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Requerido</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Nombre de la categoría (3-50 caracteres)</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Descripción de la categoría (10-200 caracteres)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de request</h4>
+                        <pre class="response-example">
+    {
+        "name": "Categoría nueva",
+        "description": "Descripción detallada de la categoría nueva"
+    }</pre>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>201</td>
+                                    <td>Categoría creada exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>400</td>
+                                    <td>Datos de entrada inválidos</td>
+                                </tr>
+                                <tr>
+                                    <td>403</td>
+                                    <td>Faltan parámetros</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Categoria creada",
+        "data": {
+            "id": "681855e9c8af13c86ecc332d",
+            "name": "Categoría nueva",
+            "description": "Descripción detallada de la categoría nueva"
+        }
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/categories/{id}</span>
+                    <span class="description">Obtener una categoría por ID</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID de la categoría a obtener</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Categoría encontrada exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Categoría no encontrada</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "id": "681855e9c8af13c86ecc332d",
+        "name": "Categoría 1",
+        "description": "Descripción de la categoría 1"
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method put">PUT</span>
+                    <span class="endpoint-path">/api/categories/{id}</span>
+                    <span class="description">Actualizar una categoría</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID de la categoría a actualizar</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="schema-section">
+                        <h3>Request Body</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Campo</th>
+                                    <th>Tipo</th>
+                                    <th>Requerido</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>name</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Nombre de la categoría (3-50 caracteres)</td>
+                                </tr>
+                                <tr>
+                                    <td>description</td>
+                                    <td>string</td>
+                                    <td><span class="required">Sí</span></td>
+                                    <td>Descripción de la categoría (10-200 caracteres)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de request</h4>
+                        <pre class="response-example">
+    {
+        "name": "Categoría actualizada",
+        "description": "Descripción actualizada de la categoría"
+    }</pre>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Categoría actualizada exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>400</td>
+                                    <td>Datos de entrada inválidos</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Categoría no encontrada</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Categoria actualizada",
+        "data": {
+            "id": "681855e9c8af13c86ecc332d",
+            "name": "Categoría actualizada",
+            "description": "Descripción actualizada de la categoría"
+        }
+    }</pre>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="endpoint-container">
+                <div class="endpoint-header" onclick="toggleEndpoint(this)">
+                    <span class="method delete">DELETE</span>
+                    <span class="endpoint-path">/api/categories/{id}</span>
+                    <span class="description">Eliminar una categoría</span>
+                </div>
+                <div class="endpoint-content">
+                    <div class="parameter-table">
+                        <h3>Parámetros de ruta</h3>
+                        <table>
+                            <tr>
+                                <th>Parámetro</th>
+                                <th>Tipo</th>
+                                <th>Requerido</th>
+                                <th>Descripción</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>string</td>
+                                <td><span class="required">Sí</span></td>
+                                <td>ID de la categoría a eliminar</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="response-section">
+                        <h3>Respuestas</h3>
+                        <div class="parameter-table">
+                            <table>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                </tr>
+                                <tr>
+                                    <td>200</td>
+                                    <td>Categoría eliminada exitosamente</td>
+                                </tr>
+                                <tr>
+                                    <td>404</td>
+                                    <td>Categoría no encontrada</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h4>Ejemplo de respuesta</h4>
+                        <pre class="response-example">
+    {
+        "msg": "Categoria eliminada"
+    }</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    &nbsp;
+    <footer class="bg-dark text-white">
+        <p>Sofía Vigliaccio | DWM4AP | Aplicaciones Hibridas | Jonathan Cruz</p>
+    </footer>
+
+    <script>
+        function toggleEndpoint(element) {
+            const content = element.nextElementSibling;
+            const container = element.parentElement;
+            
+            // Cerrar todos los demás endpoints abiertos
+            const allEndpoints = document.querySelectorAll('.endpoint-container');
+            allEndpoints.forEach(ep => {
+                if (ep !== container && ep.classList.contains('expanded')) {
+                    const otherContent = ep.querySelector('.endpoint-content');
+                    otherContent.style.animation = 'fadeOut 0.3s ease';
+                    
+                    setTimeout(() => {
+                        otherContent.classList.remove('active');
+                        ep.classList.remove('expanded');
+                        otherContent.style.animation = '';
+                    }, 300);
+                }
+            });
+            
+            if (content.classList.contains('active')) {
+                // Si está activo, lo cerramos con animación
+                content.style.animation = 'fadeOut 0.3s ease';
+                
+                // Esperamos a que termine la animación antes de quitar la clase
+                setTimeout(() => {
+                    content.classList.remove('active');
+                    container.classList.remove('expanded');
+                    content.style.animation = '';
+                }, 300);
+            } else {
+                // Si está inactivo, lo abrimos
+                content.classList.add('active');
+                container.classList.add('expanded');
+                content.style.animation = 'fadeIn 0.3s ease';
+            }
+        }
+    </script>
+</body>
+</html>
